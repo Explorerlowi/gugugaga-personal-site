@@ -1,16 +1,103 @@
-# React + Vite
+# 咕咕嘎嘎个人网站（gugugaga-personal-site）
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+一个基于 **React + Vite** 的个人前端站点，风格是抽象、霓虹、轻故障艺术感。
 
-Currently, two official plugins are available:
+- GitHub 仓库：`https://github.com/Explorerlowi/gugugaga-personal-site`
+- 当前框架：React 19 + Vite 8
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+---
 
-## React Compiler
+## 本地开发
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+```bash
+npm install
+npm run dev
+```
 
-## Expanding the ESLint configuration
+默认开发地址：`http://localhost:5173`
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+---
+
+## 打包构建
+
+```bash
+npm run build
+```
+
+构建产物目录：`dist/`
+
+本地预览构建结果：
+
+```bash
+npm run preview
+```
+
+---
+
+## 项目结构
+
+```text
+gugugaga-site/
+├─ public/                 # 静态资源
+├─ src/
+│  ├─ assets/              # 图片素材（含AI生成图）
+│  ├─ App.jsx              # 首页结构
+│  ├─ App.css              # 页面样式
+│  └─ main.jsx             # 入口
+├─ index.html
+├─ package.json
+└─ vite.config.js
+```
+
+---
+
+## 部署方式
+
+### 方式 A：Cloudflare Pages（推荐，自动部署）
+
+适合“代码一更新就自动上线”。
+
+1. 在 Cloudflare Pages 创建项目并连接 GitHub 仓库 `Explorerlowi/gugugaga-personal-site`
+2. 构建配置填写：
+   - Build command: `npm run build`
+   - Build output directory: `dist`
+3. 之后每次 push 到 `main`，Cloudflare 会自动重新构建并部署
+
+### 方式 B：手动上传 dist
+
+适合临时或手动发布：
+
+1. 本地执行 `npm run build`
+2. 上传 `dist/` 内文件到 Cloudflare 对应部署入口
+3. 点击 Deploy 完成更新
+
+---
+
+## 域名绑定建议
+
+- 若使用 **Pages**：在项目的 **Custom domains** 中添加域名（如 `gugugaga.virtualcompanion.top`）
+- 若使用 **Worker Route**：在 Worker 中添加 route（如 `gugugaga.virtualcompanion.top/*`）
+
+---
+
+## 常用命令
+
+```bash
+# 安装依赖
+npm install
+
+# 启动开发环境
+npm run dev
+
+# 生产构建
+npm run build
+
+# 预览构建结果
+npm run preview
+```
+
+---
+
+## 说明
+
+本项目中的部分视觉素材由 AI 生成并二次设计，仅用于该站点视觉展示。
