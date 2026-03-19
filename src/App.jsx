@@ -2,6 +2,8 @@ import './App.css'
 import imgPenguin from './assets/2026-03-18/001_5ca6bd.png'
 import imgLamp from './assets/2026-03-18/001_6fcd97.png'
 import imgCollage from './assets/2026-03-18/001_85b899.png'
+import imgEndfieldPenguin from './assets/2026-03-19/endfield-penguin.jpg'
+import videoEndfieldPenguin from './assets/2026-03-19/endfield-penguin.mp4'
 
 const galleryItems = [
   {
@@ -44,6 +46,7 @@ function App() {
 
         <nav className="nav" aria-label="站点导航">
           <a href="#gallery">图像切片</a>
+          <a href="#endfield-drop">新素材</a>
           <a href="#manifesto">站点宣言</a>
         </nav>
       </header>
@@ -118,6 +121,44 @@ function App() {
             </div>
           </article>
         ))}
+      </section>
+
+      <section className="drop" id="endfield-drop" aria-label="新上传素材">
+        <div className="drop-heading">
+          <p className="section-kicker">今日新素材</p>
+          <h2>明日方舟终末地 · 企鹅化现场</h2>
+          <p className="section-text">
+            你刚发来的视频和图片我都放上来了：一边是“管理员被同化成企鹅”的现场录像，
+            一边是双企鹅定格图，直接挂在首页内容流里。
+          </p>
+        </div>
+
+        <div className="drop-grid">
+          <article className="drop-card">
+            <video controls playsInline preload="metadata" poster={imgEndfieldPenguin}>
+              <source src={videoEndfieldPenguin} type="video/mp4" />
+              你的浏览器不支持 video 标签。
+            </video>
+            <div className="drop-card-body">
+              <p className="card-tone">视频切片</p>
+              <h3>管理员，欢迎加入企鹅阵营</h3>
+              <p className="card-text">
+                雪原、洗脑台词、企鹅化变身、最后全员同化，梗浓度直接拉满。
+              </p>
+            </div>
+          </article>
+
+          <article className="drop-card">
+            <img src={imgEndfieldPenguin} alt="终末地企鹅化双人定格图" />
+            <div className="drop-card-body">
+              <p className="card-tone">图片切片</p>
+              <h3>双企鹅定格</h3>
+              <p className="card-text">
+                一张图就把“我是凑企鹅”的世界观钉死在首页，够抽象也够可爱。
+              </p>
+            </div>
+          </article>
+        </div>
       </section>
 
       <section className="note-shell" id="manifesto">

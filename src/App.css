@@ -361,6 +361,43 @@ img {
   transform: rotate(-0.5deg);
 }
 
+.drop {
+  margin-top: 36px;
+}
+
+.drop-heading h2 {
+  margin: 14px 0 12px;
+  font-size: clamp(2rem, 4.5vw, 3rem);
+  line-height: 1.04;
+}
+
+.drop-grid {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 20px;
+}
+
+.drop-card {
+  overflow: hidden;
+  border-radius: 28px;
+  border: 1px solid var(--line);
+  background: var(--surface);
+  box-shadow: var(--shadow);
+}
+
+.drop-card video,
+.drop-card img {
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+  background: #000;
+}
+
+.drop-card-body {
+  padding: 18px 18px 22px;
+}
+
 .note-shell {
   padding-top: 28px;
 }
@@ -393,7 +430,8 @@ img {
 
   .hero,
   .section-heading,
-  .gallery {
+  .gallery,
+  .drop-grid {
     grid-template-columns: 1fr;
   }
 
@@ -446,6 +484,7 @@ img {
 
   .hero-panel,
   .card-body,
+  .drop-card-body,
   .note {
     padding: 20px;
   }
