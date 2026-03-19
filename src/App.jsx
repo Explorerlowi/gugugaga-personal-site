@@ -2,6 +2,7 @@ import './App.css'
 import imgPenguin from './assets/2026-03-18/001_5ca6bd.png'
 import imgLamp from './assets/2026-03-18/001_6fcd97.png'
 import imgCollage from './assets/2026-03-18/001_85b899.png'
+import imgDriftPenguin from './assets/2026-03-19/drift-penguin.jpg'
 import imgEndfieldPenguin from './assets/2026-03-19/endfield-penguin.jpg'
 import videoEndfieldPenguin from './assets/2026-03-19/endfield-penguin.mp4'
 
@@ -32,6 +33,19 @@ const galleryItems = [
   },
 ]
 
+const driftItems = [
+  { id: 1, top: '8%', left: '4%', size: '112px', duration: '16s', delay: '-3s', xMid: '34px', yMid: '-24px', xEnd: '10px', yEnd: '20px', tilt: '-10deg' },
+  { id: 2, top: '12%', left: '22%', size: '88px', duration: '13s', delay: '-8s', xMid: '-30px', yMid: '28px', xEnd: '18px', yEnd: '-12px', tilt: '12deg' },
+  { id: 3, top: '6%', left: '44%', size: '132px', duration: '18s', delay: '-5s', xMid: '26px', yMid: '34px', xEnd: '-16px', yEnd: '-18px', tilt: '-14deg' },
+  { id: 4, top: '16%', left: '70%', size: '96px', duration: '14s', delay: '-11s', xMid: '-22px', yMid: '-30px', xEnd: '22px', yEnd: '14px', tilt: '9deg' },
+  { id: 5, top: '35%', left: '10%', size: '126px', duration: '19s', delay: '-7s', xMid: '28px', yMid: '-20px', xEnd: '-12px', yEnd: '24px', tilt: '-8deg' },
+  { id: 6, top: '42%', left: '32%', size: '92px', duration: '12s', delay: '-2s', xMid: '-18px', yMid: '22px', xEnd: '24px', yEnd: '-14px', tilt: '11deg' },
+  { id: 7, top: '38%', left: '54%', size: '118px', duration: '17s', delay: '-10s', xMid: '20px', yMid: '-34px', xEnd: '-18px', yEnd: '12px', tilt: '-12deg' },
+  { id: 8, top: '48%', left: '78%', size: '84px', duration: '11s', delay: '-6s', xMid: '-24px', yMid: '18px', xEnd: '12px', yEnd: '-20px', tilt: '10deg' },
+  { id: 9, top: '68%', left: '18%', size: '104px', duration: '15s', delay: '-12s', xMid: '24px', yMid: '-16px', xEnd: '-10px', yEnd: '18px', tilt: '-9deg' },
+  { id: 10, top: '70%', left: '60%', size: '138px', duration: '20s', delay: '-4s', xMid: '-32px', yMid: '-28px', xEnd: '14px', yEnd: '24px', tilt: '13deg' },
+]
+
 function App() {
   return (
     <main className="page">
@@ -45,6 +59,7 @@ function App() {
         </a>
 
         <nav className="nav" aria-label="站点导航">
+          <a href="#drift-show">漂浮企鹅</a>
           <a href="#gallery">图像切片</a>
           <a href="#endfield-drop">新素材</a>
           <a href="#manifesto">站点宣言</a>
@@ -98,6 +113,48 @@ function App() {
             <li>更稳的移动端排版</li>
           </ul>
         </aside>
+      </section>
+
+      <section className="drift-section" id="drift-show" aria-labelledby="drift-title">
+        <div className="drift-copy">
+          <p className="section-kicker">漂浮企鹅</p>
+          <h2 id="drift-title">一整池会飘来飘去的企鹅分身</h2>
+          <p className="section-text">
+            同一张企鹅图被拆成不同节奏和轨迹，在这块区域里持续漂移。把鼠标停在任意一只上面，
+            它就会暂时停住，离开后继续晃回自己的航线。
+          </p>
+        </div>
+
+        <div
+          className="drift-stage"
+          role="list"
+          aria-label="漂浮企鹅互动展示，悬停单个企鹅可以暂停其漂浮动画"
+        >
+          {driftItems.map((item) => (
+            <figure
+              className="drift-item"
+              key={item.id}
+              role="listitem"
+              style={{
+                '--top': item.top,
+                '--left': item.left,
+                '--size': item.size,
+                '--duration': item.duration,
+                '--delay': item.delay,
+                '--x-mid': item.xMid,
+                '--y-mid': item.yMid,
+                '--x-end': item.xEnd,
+                '--y-end': item.yEnd,
+                '--tilt': item.tilt,
+              }}
+              aria-label={`漂浮企鹅 ${item.id}`}
+            >
+              <div className="drift-bob">
+                <img src={imgDriftPenguin} alt={`漂浮中的企鹅分身 ${item.id}`} />
+              </div>
+            </figure>
+          ))}
+        </div>
       </section>
 
       <section className="section-heading" id="gallery">
