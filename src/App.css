@@ -512,12 +512,20 @@ img {
   box-shadow: var(--shadow);
 }
 
+.drop-card-media {
+  display: grid;
+  place-items: center;
+  padding: 18px;
+  background: #000;
+}
+
 .drop-card video,
 .drop-card img {
+  display: block;
   width: 100%;
-  aspect-ratio: 16 / 10;
-  object-fit: cover;
-  background: #000;
+  height: auto;
+  max-height: min(70vh, 560px);
+  object-fit: contain;
 }
 
 .drop-card-body {

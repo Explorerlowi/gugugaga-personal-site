@@ -192,10 +192,12 @@ function App() {
 
         <div className="drop-grid">
           <article className="drop-card">
-            <video controls playsInline preload="metadata" poster={imgEndfieldPenguin}>
-              <source src={videoEndfieldPenguin} type="video/mp4" />
-              你的浏览器不支持 video 标签。
-            </video>
+            <div className="drop-card-media">
+              <video controls playsInline preload="metadata" poster={imgEndfieldPenguin}>
+                <source src={videoEndfieldPenguin} type="video/mp4" />
+                你的浏览器不支持 video 标签。
+              </video>
+            </div>
             <div className="drop-card-body">
               <p className="card-tone">视频切片</p>
               <h3>管理员，欢迎加入企鹅阵营</h3>
@@ -206,7 +208,9 @@ function App() {
           </article>
 
           <article className="drop-card">
-            <img src={imgEndfieldPenguin} alt="终末地企鹅化双人定格图" />
+            <div className="drop-card-media">
+              <img src={imgEndfieldPenguin} alt="终末地企鹅化双人定格图" />
+            </div>
             <div className="drop-card-body">
               <p className="card-tone">图片切片</p>
               <h3>双企鹅定格</h3>
