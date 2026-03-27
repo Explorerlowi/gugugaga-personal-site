@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react'
 import './App.css'
 import imgPenguin from './assets/2026-03-18/001_5ca6bd.png'
 import imgLamp from './assets/2026-03-18/001_6fcd97.png'
@@ -5,6 +6,8 @@ import imgCollage from './assets/2026-03-18/001_85b899.png'
 import imgDriftPenguin from './assets/2026-03-19/drift-penguin.jpg'
 import imgEndfieldPenguin from './assets/2026-03-19/endfield-penguin.jpg'
 import videoEndfieldPenguin from './assets/2026-03-19/endfield-penguin.mp4'
+
+const THEME_STORAGE_KEY = 'gugugaga-theme'
 
 const galleryItems = [
   {
@@ -47,6 +50,62 @@ const driftItems = [
 ]
 
 function App() {
+  const [themePreference, setThemePreference] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'system'
+    }
+
+    const savedTheme = window.localStorage.getItem(THEME_STORAGE_KEY)
+    return savedTheme === 'light' || savedTheme === 'dark' ? savedTheme : 'system'
+  })
+  const [systemTheme, setSystemTheme] = useState(() => {
+    if (typeof window === 'undefined') {
+      return 'dark'
+    }
+
+    return window.matchMedia('(prefers-color-scheme: dark)').matches ? 'dark' : 'light'
+  })
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(prefers-color-scheme: dark)')
+    const updateSystemTheme = (event) => {
+      setSystemTheme(event.matches ? 'dark' : 'light')
+    }
+
+    mediaQuery.addEventListener('change', updateSystemTheme)
+
+    return () => {
+      mediaQuery.removeEventListener('change', updateSystemTheme)
+    }
+  }, [])
+
+  useEffect(() => {
+    const root = document.documentElement
+    const activeTheme = themePreference === 'system' ? systemTheme : themePreference
+
+    root.style.colorScheme = activeTheme
+
+    if (themePreference === 'system') {
+      delete root.dataset.theme
+    } else {
+      root.dataset.theme = themePreference
+    }
+  }, [systemTheme, themePreference])
+
+  const activeTheme = themePreference === 'system' ? systemTheme : themePreference
+  const isDarkTheme = activeTheme === 'dark'
+
+  const handleThemeToggle = () => {
+    const nextTheme = isDarkTheme ? 'light' : 'dark'
+    setThemePreference(nextTheme)
+    window.localStorage.setItem(THEME_STORAGE_KEY, nextTheme)
+  }
+
+  const handleThemeReset = () => {
+    setThemePreference('system')
+    window.localStorage.removeItem(THEME_STORAGE_KEY)
+  }
+
   return (
     <main className="page">
       <header className="topbar">
@@ -58,12 +117,38 @@ function App() {
           </span>
         </a>
 
-        <nav className="nav" aria-label="站点导航">
-          <a href="#drift-show">漂浮企鹅</a>
-          <a href="#gallery">图像切片</a>
-          <a href="#endfield-drop">新素材</a>
-          <a href="#manifesto">站点宣言</a>
-        </nav>
+        <div className="topbar-actions">
+          <nav className="nav" aria-label="站点导航">
+            <a href="#drift-show">漂浮企鹅</a>
+            <a href="#gallery">图像切片</a>
+            <a href="#endfield-drop">新素材</a>
+            <a href="#manifesto">站点宣言</a>
+          </nav>
+
+          <div className="theme-controls" aria-label="主题切换">
+            <button
+              className="theme-toggle"
+              type="button"
+              onClick={handleThemeToggle}
+              aria-pressed={themePreference !== 'system'}
+              aria-label={`切换到${isDarkTheme ? '白天' : '黑夜'}模式`}
+            >
+              <span className="theme-toggle-icon" aria-hidden="true">
+                {isDarkTheme ? '☀' : '☾'}
+              </span>
+              <span className="theme-toggle-text">
+                <strong>{isDarkTheme ? '切到白天' : '切到黑夜'}</strong>
+                <small>{themePreference === 'system' ? '当前跟随系统' : '当前为手动模式'}</small>
+              </span>
+            </button>
+
+            {themePreference !== 'system' ? (
+              <button className="theme-reset" type="button" onClick={handleThemeReset}>
+                跟随系统
+              </button>
+            ) : null}
+          </div>
+        </div>
       </header>
 
       <section className="hero" id="home">
